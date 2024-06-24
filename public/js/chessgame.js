@@ -8,7 +8,7 @@ let PlayerRole = null;
 
 const renderBoard = () => {
     const board = chess.board();
-    boardElement.innerHTML = ""; // Clear the board
+    boardElement.innerHTML = ""; 
     board.forEach((row, rowindex) => {
         row.forEach((square, squareindex) => {
             const squareElement = document.createElement("div");
@@ -26,7 +26,7 @@ const renderBoard = () => {
                     "piece",
                     square.color === 'w' ? 'white' : 'black'
                 );
-                pieceElement.innerText = getPieceUnicode(square); // Display piece Unicode symbol
+                pieceElement.innerText = getPieceUnicode(square); 
                 pieceElement.draggable = PlayerRole === square.color;
 
                 pieceElement.addEventListener("dragstart", (e) => {
@@ -64,10 +64,8 @@ const renderBoard = () => {
         });
     });
 
-    // Debugging output
     console.log("PlayerRole:", PlayerRole);
 
-    // Apply flipped class based on PlayerRole
     if (PlayerRole === 'b') {
         boardElement.classList.add('flipped');
         console.log("Added 'flipped' class");
@@ -105,13 +103,13 @@ const getPieceUnicode = (piece) => {
 };
 
 socket.on("PlayerRole", function (role) {
-    console.log("Received PlayerRole:", role); // Debug log
+    console.log("Received PlayerRole:", role); 
     PlayerRole = role;
     renderBoard();
 });
 
 socket.on("SpectatorRole", function() {
-    console.log("Received SpectatorRole"); // Debug log
+    console.log("Received SpectatorRole"); 
     PlayerRole = null;
     renderBoard();
 });
